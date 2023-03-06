@@ -1,7 +1,6 @@
 package com.example.bluetoothapp.data.chat
 
 import android.Manifest
-import android.Manifest.*
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
@@ -17,7 +16,7 @@ import kotlinx.coroutines.flow.update
 
 
 @SuppressLint("MissingPermission")
-class AndroidBluetoothController(private val context: Context):BluetoothController {
+class AndroidBluetoothController(private val context: Context): BluetoothController {
 
     private val bluetoothManager by lazy {
          context.getSystemService(BluetoothManager::class.java)
@@ -42,7 +41,7 @@ class AndroidBluetoothController(private val context: Context):BluetoothControll
 
             val newDevice = device.toBluetoothDeviceDomain()
 
-            if (newDevice in devices) devices else devices+newDevice
+            if (newDevice in devices) devices else devices + newDevice
         }
 
     }
@@ -57,11 +56,12 @@ class AndroidBluetoothController(private val context: Context):BluetoothControll
         if (!hasPermission(Manifest.permission.BLUETOOTH_SCAN)){
             return
         }
-        context.registerReceiver(foundDeviceReceiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
+            context.registerReceiver(foundDeviceReceiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
 
-        updatePairedDevices()
+            updatePairedDevices()
 
-        bluetoothAdapter?.startDiscovery()
+            bluetoothAdapter?.startDiscovery()
+
     }
 
 
@@ -70,7 +70,7 @@ class AndroidBluetoothController(private val context: Context):BluetoothControll
        if (!hasPermission(Manifest.permission.BLUETOOTH_SCAN)){
            return
        }
-        bluetoothAdapter?.cancelDiscovery()
+           bluetoothAdapter?.cancelDiscovery()
     }
 
 
@@ -84,14 +84,15 @@ class AndroidBluetoothController(private val context: Context):BluetoothControll
         if (!hasPermission(Manifest.permission.BLUETOOTH_CONNECT)){
             return
         }
-        bluetoothAdapter
-            ?.bondedDevices
-            ?.map {
-                it.toBluetoothDeviceDomain()
-            }
-            ?.also {  devices->
-                _pairedDevices.update { devices }
-            }
+            bluetoothAdapter
+                ?.bondedDevices
+                ?.map {
+                    it.toBluetoothDeviceDomain()
+                }
+                ?.also {  devices->
+                    _pairedDevices.update { devices }
+                }
+
     }
 
 

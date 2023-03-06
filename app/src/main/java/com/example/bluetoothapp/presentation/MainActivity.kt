@@ -60,12 +60,19 @@ class MainActivity : ComponentActivity() {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-            permissionLauncher.launch(arrayOf(
+            permissionLauncher.launch(
+                arrayOf(
                 android.Manifest.permission.BLUETOOTH_SCAN,
                 android.Manifest.permission.BLUETOOTH_CONNECT,
             ))
         }
 
+
+       /* permissionLauncher.launch(
+            arrayOf(
+                android.Manifest.permission.BLUETOOTH_SCAN,
+                android.Manifest.permission.BLUETOOTH_CONNECT,
+            ))*/
 
 
 
